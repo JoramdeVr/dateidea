@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Invite</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe6e6;
+            color: #800000;
+        }
+        h1, h2 {
+            color: #b30000;
+        }
+        .container {
+            padding: 20px;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .option {
+            width: 250px;
+            border: 2px solid #ffcccc;
+            border-radius: 15px;
+            padding: 15px;
+            background-color: #fff0f5;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .option:hover {
+            transform: scale(1.1);
+            background-color: #ffe6f0;
+        }
+        img {
+            max-width: 100%;
+            height: 150px;
+            border-radius: 10px;
+        }
+        .recap {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #ffcccc;
+            border-radius: 15px;
+            background-color: #fff0f5;
+            color: #800000;
+            font-size: 1.2em;
+            line-height: 1.5;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        let selections = {
+            food: '',
+            activity: '',
+            after: '',
+            date: ''
+        };
+
+        function loadPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        function chooseOption(nextPageId, selectionKey, value) {
+            if (selectionKey) {
+                selections[selectionKey] = value;
+            }
+            loadPage(nextPageId);
+        }
+
+        function saveDate() {
+            const date = document.getElementById('datePicker').value;
+            selections.date = date;
+            loadPage('page6');
+            displayRecap();
+        }
+
+        function displayRecap() {
+            const recapElement = document.getElementById('recapDetails');
+            recapElement.innerHTML = `
+                <h2>Your Dream Date Recap</h2>
+                <p><strong>Food:</strong> ${selections.food}</p>
+                <p><strong>Activity:</strong> ${selections.activity}</p>
+                <p><strong>After Activity:</strong> ${selections.after}</p>
+                <p><strong>Date:</strong> ${selections.date}</p>
+                <p><em>Take a picture of this screen to cherish your lovely plan!</em></p>
+            `;
+        }
+    </script>
+</head>
+<body onload="loadPage('page1')">
+    <div class="container">
+        <!-- Pagina 1 -->
+        <div id="page1" class="page">
+            <h1>Will You Go On a Romantic Date With Me?</h1>
+            <div class="options">
+                <div class="option" onclick="chooseOption('page2')">
+                    <p>Yes</p>
+                </div>
+                <div class="option">
+                    <p>No</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 2 -->
+        <div id="page2" class="page" style="display: none;">
+            <h1>What Would You Like to Eat?</h1>
+            <div class="options">
+                <div class="option" onclick="chooseOption('page3', 'food', 'Italian')">
+                    <img src="https://media.istockphoto.com/id/1227415751/nl/foto/volledige-tafel-van-italiaanse-maaltijden-op-borden-pizza-pasta-ravioli-carpaccio-caprese.jpg?s=1024x1024&w=is&k=20&c=NhY5MRus1GZ0ii0gDv8373_zXi1CnlpY7KKIcjA0G7w=" alt="Italian">
+                    <p>Italian</p>
+                </div>
+                <div class="option" onclick="chooseOption('page3', 'food', 'Japanese')">
+                    <img src="https://media.istockphoto.com/id/847043282/nl/foto/japans-eten-gezond-eten.jpg?s=1024x1024&w=is&k=20&c=rSXY3zQ9BR0nWDqANFI7JmwozqVN8KIJp-Rq1lLClXA=" alt="Japanese">
+                    <p>Japanese</p>
+                </div>
+                <div class="option" onclick="chooseOption('page3', 'food', 'Thais')">
+                    <img src="https://media.istockphoto.com/id/1312283557/nl/foto/klassieke-thaise-gerechten.jpg?s=1024x1024&w=is&k=20&c=NeiSGijOITB2iIfORp2ia2Mq18xgrLTK9WTyJFLuql8=" alt="Thais">
+                    <p>Thais</p>
+                </div>
+                <div class="option" onclick="chooseOption('page3', 'food', 'Dutch')">
+                    <img src="https://media.istockphoto.com/id/184326079/nl/foto/poffertjes-or-little-pancakes.jpg?s=1024x1024&w=is&k=20&c=Jz73ZqlwkEnI_2A9pEk1ntJmXyJXSZh6xSOZomSN_4w=" alt="Dutch">
+                    <p>Dutch</p>
+                </div>
+                <div class="option" onclick="chooseOption('page3', 'food', 'Korean')">
+                    <img src="https://media.istockphoto.com/id/477542696/nl/foto/korean-pork-bone-hot-pot-soup.jpg?s=1024x1024&w=is&k=20&c=rlA2G2jH2XerrG_NAzujXqqLXKsZswrzW9GFfyNfp6k=" alt="Korean">
+                    <p>Korean</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 3 -->
+        <div id="page3" class="page" style="display: none;">
+            <h1>What Romantic Activity Would You Like?</h1>
+            <div class="options">
+                <div class="option" onclick="chooseOption('page4', 'activity', 'Arcade')">
+                    <img src="https://media.istockphoto.com/id/1718330623/nl/foto/date-night-at-the-arcade.jpg?s=1024x1024&w=is&k=20&c=S4ha17WHVbzqn2HdFVYWaTYPMn02KXf2pYdWZa_iSEo=" alt="Arcade">
+                    <p>Arcade</p>
+                </div>
+                <div class="option" onclick="chooseOption('page4', 'activity', 'Cinema')">
+                    <img src="https://media.istockphoto.com/id/1731747998/nl/foto/movies-and-popcorn-man-holding-pop-corn-box-at-cinema-action-thriller-or-scifi-entertainment.jpg?s=1024x1024&w=is&k=20&c=76V2nH6qRV-4rAS09MeqO4KJO1YL3fXtGUsstpsBqHA=" alt="Cinema">
+                    <p>Cinema</p>
+                </div>
+                <div class="option" onclick="chooseOption('page4', 'activity', 'Bowling')">
+                    <img src="https://media.istockphoto.com/id/523539959/nl/foto/bowling.jpg?s=1024x1024&w=is&k=20&c=CMZx8R6_Rp795iHxfFdVBQivxPuMbMyr8eAK-__2wJE=" alt="Bowling">
+                    <p>Bowling</p>
+                </div>
+                <div class="option" onclick="chooseOption('page4', 'activity', 'Karaoke')">
+                    <img src="https://media.istockphoto.com/id/513477202/nl/foto/group-of-people-singing-karaoke.jpg?s=1024x1024&w=is&k=20&c=vLdsb1usZjFIiDQ8YfbGuAEfTBjSu1L5bXhJQc1cwYI=" alt="Karaoke">
+                    <p>Karaoke</p>
+                </div>
+                <div class="option" onclick="chooseOption('page4', 'activity', 'Museum')">
+                    <img src="https://media.istockphoto.com/id/1495956202/nl/foto/blurred-motion-of-people-in-art-gallery.jpg?s=1024x1024&w=is&k=20&c=xGycdBAH5wV_z-92L3gh1qQ7V4Oa8bY2ateUytcrf5I=" alt="Museum">
+                    <p>Museum</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 4 -->
+        <div id="page4" class="page" style="display: none;">
+            <h1>What Would You Like to Do After?</h1>
+            <div class="options">
+                <div class="option" onclick="chooseOption('page5', 'after', 'Walk Home')">
+                    <img src="https://media.istockphoto.com/id/1246382042/nl/foto/voeten-die-sneakers-voor-pijl-op-weg-in-openlucht-dragen-de-pijl-van-de-richting-voor-een.jpg?s=1024x1024&w=is&k=20&c=vFmaQcTUDa4H1SLIyCTbo66kwbU5F5fSB3_oZ6P016c=" alt="Walk Home">
+                    <p>Walk Home</p>
+                </div>
+                <div class="option" onclick="chooseOption('page5', 'after', 'Watching the Stars together')">
+                    <img src="https://media.istockphoto.com/id/1330897120/nl/foto/happy-couple-nature-camping-in-the-canyon-sitting-by-campfire-watching-night-sky-with-milky.jpg?s=1024x1024&w=is&k=20&c=R5C_GTilDo5-qFUVKYRYYKBDb5O_BPRQyWVNOu4LquQ=" alt="Watching the Stars together">
+                    <p>Watching the Stars together</p>
+                </div>
+                <div class="option" onclick="chooseOption('page5', 'after', 'Cafe/ Bar')">
+                    <img src="https://media.istockphoto.com/id/1937536154/nl/foto/close-up-of-a-martini-glass-held-by-a-female-at-a-bar.jpg?s=1024x1024&w=is&k=20&c=ROdrI5XqoK0dRTYWompHT9A0U-3-jbvg_MT1Am1DekU=" alt="Cafe/ Bar">
+                    <p>Cafe/ Bar</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 5 -->
+        <div id="page5" class="page" style="display: none;">
+            <h1>When Shall We Go?</h1>
+            <div class="calendar">
+                <label for="datePicker">Pick Your Date: </label>
+                <input type="date" id="datePicker">
+                <button onclick="saveDate()">Next</button>
+            </div>
+        </div>
+
+        <!-- Pagina 6 -->
+        <div id="page6" class="page" style="display: none;">
+            <div id="recapDetails" class="recap">
+                <!-- Recap content will be injected here -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
